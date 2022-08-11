@@ -49,7 +49,7 @@ def get_version():
     version = open("VERSION", 'r').read().strip()
     build_number = getenv("BUILD_NUMBER", 0)
     branch = getenv("BRANCH_NAME", "")
-    full_version = f"{version}.{build_number}"
+    full_version = f"{version}"
     if branch != "":
         if branch.startswith("rc"):
             full_version = f"{version}.rc{build_number}"
@@ -85,10 +85,10 @@ setup(
     # Package configuration
     packages=find_packages(exclude=('tests',)),
     include_package_data=True,
-    python_requires='>= 3.6',
+    python_requires='>= 3.8',
     install_requires=get_install_requirements(),
     # Licensing and copyright
-    license='Apache 2.0',
+    license='MIT',
     entry_points={
         'console_scripts': ['octo-bots-executor=octo_bots_python.bots_executor:main'],
     })
