@@ -1,0 +1,17 @@
+settings:
+  parallel-background-jobs: 10
+  bots-endpoint: /events
+  client-validity-time-minutes: 10
+  parallel-bots: true
+credentials:
+  github-app-credentials:
+    api-url: https://api.github.com
+    app-name: octo-test-app
+    app-creds-path: ../../data/github/octo_bot_github_app_creds.yml
+bots:
+  - ./bots/github_clang_bot.yml
+  - ./bots/github_pr_bot.yml
+  - ./bots/github_branch_bot.yml
+  - ./bots/github_cppcheck_bot.yml
+jobs:
+  - ./jobs/github_stale_job.yml

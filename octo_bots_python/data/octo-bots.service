@@ -1,0 +1,12 @@
+[Unit]
+Description=Dev Pipeline Bots Daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/octo-bots-python/bots_executor.py --config-path=/opt/octo-bots-python/bots/config/bots_manager_config.yml
+WorkingDirectory=/opt/octo-bots-python
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=sysinit.target

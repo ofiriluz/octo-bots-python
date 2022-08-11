@@ -1,0 +1,35 @@
+bots:
+  - name: Checkmarx scan
+    parallel: true
+    operations:
+      - pull-request-checkmarx:
+          risk-scheme:
+            min-high-vuls: 1
+            min-medium-vuls: 20
+            min-low-vuls: 100
+            min-info-vuls: 10000
+          only-main-branch: true
+          scan-timeout: 30 minutes
+          scan-poll-interval: 5 seconds
+      - branch-deleted-checkmarx-cleanup:
+          forbidden-branches:
+            - release/*
+            - staging
+            - master
+    filters:
+      - events-filter:
+          events:
+            - name: pull_request
+              actions:
+                - opened
+                - reopened
+                - ready_for_review
+                - synchronize
+            - name: delete
+      - branch-filter:
+          head-branches:
+            - feature/*
+      - repo-filter:
+          action: ignore-only
+          repos:
+            - octo-pipeline-python

@@ -1,0 +1,16 @@
+jobs:
+  - name: Close stale issues and pull requests
+    parallel: true
+    operations:
+      - close-stale:
+          close-issues: true
+          close-prs: true
+          stale-expiration: 60 days
+          stale-comment: >
+              This issue has been automaticlly marked as stale because it has not had
+              recent activity. It will be closed and can be later re-opened.
+              Thanks for your contributions.
+          exempt-labels:
+            - hotfix
+            - release
+    every: "30 minutes"

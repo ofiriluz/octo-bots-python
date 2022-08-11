@@ -1,0 +1,11 @@
+bots:
+  - name: Release branch pull request creation
+    parallel: true
+    operations:
+      - pull-request-release-branch-creation:
+          release-patterns:
+            - release/*
+    filters:
+      - events-filter:
+          events:
+            - name: create

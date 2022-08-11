@@ -1,0 +1,18 @@
+bots:
+  - name: Cppcheck validator
+    parallel: true
+    operations:
+      - cppcheck-validator
+    filters:
+      - events-filter:
+          events:
+            - name: pull_request
+              actions:
+                - opened
+                - reopened
+                - ready_for_review
+                - synchronize
+      - repo-filter:
+          action: ignore-only
+          repos:
+            - octo-pipeline-python

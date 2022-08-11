@@ -1,0 +1,14 @@
+bots:
+  - name: Clang validator
+    parallel: true
+    operations:
+      - clang-format-validator
+    filters:
+      - events-filter:
+          events:
+            - name: pull_request
+              actions:
+                - opened
+                - reopened
+                - ready_for_review
+                - synchronize
