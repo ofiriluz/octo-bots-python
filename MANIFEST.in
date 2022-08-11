@@ -1,0 +1,2 @@
+recursive-include octo_bots_python/data *.*
+recursive-include octo_bots_python/config *.yml
