@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pytest = "*"
+twine = "*"
+python-dotenv = "*"
+isort = "*"
+toml = "*"
+
+[packages]
+PyGithub = "*"
+GitPython = "*"
+colorama = "*"
+flask = "*"
+dateparser = "*"
+CheckmarxPythonSDK = "*"
+requests = "*"
+pyyaml = "*"
+cryptography = "*"
+pydantic = "*"
+
+[requires]
+python_version = "3.8"

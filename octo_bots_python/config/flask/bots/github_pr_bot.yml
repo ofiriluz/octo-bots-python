@@ -1,0 +1,40 @@
+bots:
+  - name: Pull request editor
+    parallel: true
+    operations:
+      - pull-request-labels:
+          scheme: branches
+      - pull-request-reviewers-assign:
+          scheme:
+            name: top-contributers
+            top: 3
+      - pull-request-forbidden-files:
+          forbidden-files:
+            - octo.exe
+          target-pull-request-branches:
+            - staging
+            - master
+            - release/*
+    filters:
+      - events-filter:
+          events:
+            - name: pull_request
+              actions:
+                - opened
+                - reopened
+                - ready_for_review
+                - synchronize
+  - name: Pull request head branch deletion
+    parallel: true
+    operations:
+      - pull-request-head-branch-deletion:
+          exclude:
+            - release/*
+            - staging
+            - master
+    filters:
+      - events-filter:
+          events:
+            - name: pull_request
+              actions:
+                - closed

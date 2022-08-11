@@ -1,0 +1,44 @@
+settings:
+  parallel-background-jobs: 10
+  bots-endpoint: /events
+  client-validity-time-minutes: 10
+  parallel-bots: true
+credentials:
+  github-app-credentials:
+    api-url: https://api.github.com
+    app-name: octo-test-app
+bots:
+  - name: Pull request editor
+    parallel: true
+    operations:
+      - pull-request-labels:
+          scheme: branches
+      - pull-request-reviewers-assign:
+          scheme:
+            name: top-contributers
+            top: 3
+    filters:
+      - events-filter:
+          events:
+            - name: pull_request
+              actions:
+                - opened
+                - reopened
+                - ready_for_review
+                - synchronize
+background-jobs:
+  - name: Close stale issues and pull requests
+    parallel: true
+    operations:
+      - close-stale:
+          close-issues: true
+          close-prs: true
+          stale-expiration: 60 days
+          stale-comment: >
+              This issue has been automaticlly marked as stale because it has not had
+              recent activity. It will be closed and can be later re-opened.
+              Thanks for your contributions.
+          exempt-labels:
+            - hotfix
+            - release
+    every: "30 minutes"
