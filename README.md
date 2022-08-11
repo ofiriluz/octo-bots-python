@@ -1,5 +1,8 @@
-Bots
+Octo Bots
 ====
+
+[![Bots Build Pipeline](https://github.com/ofiriluz/octo-bots-python/actions/workflows/build.yml/badge.svg)](https://github.com/ofiriluz/octo-bots-python/actions/workflows/build.yml)
+
 
 The bots infrastructure gives easy to define easy to work with interface for actions on events and background jobs
 
