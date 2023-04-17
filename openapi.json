@@ -1,0 +1,1153 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "DPA Access Policies",
+        "description": "Create and manage DPA policies using API. You can use these APIs to integrate with your organization workflow and ticketing tools to automatically create access policies. To run this API, you must have the DpaAdmin role.",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/access-policies": {
+            "get": {
+                "tags": [
+                    "Authorization Policies"
+                ],
+                "summary": "List All Policies",
+                "description": "Returns all authorization policies",
+                "operationId": "List_authorization_policies_api_access_policies_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response List Authorization Policies Api AccessList authorization policies",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AuthorizationPolicyListItemDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiBasicError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Authorization Policies"
+                ],
+                "summary": "Add Authorization Policy",
+                "description": "Adds a new authorization policy",
+                "operationId": "Add_authorization_policy_api_access_policies_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "Request Object",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/AuthorizationPolicyDto"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddAuthorizationPolicyResult"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiBasicError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/access-policies/{policy_id}": {
+            "get": {
+                "tags": [
+                    "Authorization Policies"
+                ],
+                "summary": "Get Specific Policy By Id",
+                "description": "Retrieves authorization policy with the given ID",
+                "operationId": "Get_an_authorization_policy_api_access_policies__policy_id__get",
+                "parameters": [
+                    {
+                        "description": "The policy ID",
+                        "required": true,
+                        "schema": {
+                            "title": "Policy Id",
+                            "type": "string",
+                            "description": "The policy ID"
+                        },
+                        "name": "policy_id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthorizationPolicyDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiBasicError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Authorization Policies"
+                ],
+                "summary": "Update Authorization Policy",
+                "description": "Updates the specified policy",
+                "operationId": "Update_authorization_policy_api_access_policies__policy_id__put",
+                "parameters": [
+                    {
+                        "description": "The policy ID to update",
+                        "required": true,
+                        "schema": {
+                            "title": "Policy Id",
+                            "type": "string",
+                            "description": "The policy ID to update"
+                        },
+                        "name": "policy_id",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "Request Object",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/AuthorizationPolicyDto"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthorizationPolicyDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiBasicError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Authorization Policies"
+                ],
+                "summary": "Delete Authorization Policy",
+                "description": "Deletes the specified policy",
+                "operationId": "Delete_authorization_policy_api_access_policies__policy_id__delete",
+                "parameters": [
+                    {
+                        "description": "The policy ID to delete",
+                        "required": true,
+                        "schema": {
+                            "title": "Policy Id",
+                            "type": "string",
+                            "description": "The policy ID to delete"
+                        },
+                        "name": "policy_id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiBasicError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AWSProviderData": {
+                "title": "AWSProviderData",
+                "required": [
+                    "regions",
+                    "tags",
+                    "vpcIds",
+                    "accountIds"
+                ],
+                "type": "object",
+                "properties": {
+                    "providerName": {
+                        "title": "Providername",
+                        "enum": [
+                            "AWS"
+                        ],
+                        "type": "string",
+                        "default": "AWS"
+                    },
+                    "regions": {
+                        "title": "Regions",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "AWS region names. For example: \"us-east-1\". Leave empty for all regions."
+                    },
+                    "tags": {
+                        "title": "Tags",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/KeyValTagType"
+                        },
+                        "description": "A list of key/value pairs that have been defined as custom tags for your  AWS instances. Leave empty for all tags."
+                    },
+                    "vpcIds": {
+                        "title": "Vpcids",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of AWS VPC IDs. The accepted syntax is \"vpc-<n>\". Leave empty for all VPCs."
+                    },
+                    "accountIds": {
+                        "title": "Accountids",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "AWS Account IDs. Leave empty for all AWS Accounts."
+                    }
+                }
+            },
+            "AddAuthorizationPolicyResult": {
+                "title": "AddAuthorizationPolicyResult",
+                "required": [
+                    "policyId"
+                ],
+                "type": "object",
+                "properties": {
+                    "policyId": {
+                        "title": "Policyid",
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiBasicError": {
+                "title": "ApiBasicError",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "title": "Code",
+                        "minLength": 4,
+                        "type": "string",
+                        "description": "An application-specific error code."
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string",
+                        "description": "A human-readable explanation specific to this occurrence of the error."
+                    },
+                    "description": {
+                        "title": "Description",
+                        "type": "string",
+                        "description": "Optional additional details of the specific error.",
+                        "default": ""
+                    }
+                },
+                "example": {
+                    "code": "DPA_INVALID_VALUE",
+                    "message": "error message",
+                    "description": "error description"
+                }
+            },
+            "ApiError": {
+                "title": "ApiError",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "title": "Code",
+                        "minLength": 4,
+                        "type": "string",
+                        "description": "An application-specific error code."
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string",
+                        "description": "A human-readable explanation specific to this occurrence of the error."
+                    },
+                    "description": {
+                        "title": "Description",
+                        "type": "string",
+                        "description": "Optional additional details of the specific error.",
+                        "default": ""
+                    },
+                    "errors": {
+                        "title": "Errors",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ApiNestedError"
+                        },
+                        "description": "Optional nested array of specific validation errors",
+                        "default": []
+                    }
+                },
+                "description": "Standard Api error response",
+                "example": {
+                    "code": "DPA_INVALID_ACCOUNT_ID",
+                    "message": "Invalid account id",
+                    "description": ""
+                }
+            },
+            "ApiNestedError": {
+                "title": "ApiNestedError",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "title": "Code",
+                        "minLength": 4,
+                        "type": "string",
+                        "description": "An application-specific error code."
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string",
+                        "description": "A human-readable explanation specific to this occurrence of the error."
+                    },
+                    "description": {
+                        "title": "Description",
+                        "type": "string",
+                        "description": "Optional additional details of the specific error.",
+                        "default": ""
+                    },
+                    "field": {
+                        "title": "Field",
+                        "type": "string",
+                        "default": "JSON Pointer to the associated entity in the request document."
+                    }
+                },
+                "example": {
+                    "code": "DPA_INVALID_VALUE",
+                    "message": "Invalid value in request input",
+                    "description": "",
+                    "field": "/account_id"
+                }
+            },
+            "AuthorizationPolicyDto": {
+                "title": "AuthorizationPolicyDto",
+                "required": [
+                    "policyName"
+                ],
+                "type": "object",
+                "properties": {
+                    "policyId": {
+                        "title": "Policyid",
+                        "type": "string",
+                        "description": "The unique identifier of the policy.",
+                        "format": "uuid4"
+                    },
+                    "policyName": {
+                        "title": "Policyname",
+                        "maxLength": 50,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The policy name."
+                    },
+                    "status": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/RuleStatus"
+                            }
+                        ],
+                        "description": "The policy status. An active policy will be in the Enabled status. To suspend a policy, change its status to Disabled.",
+                        "default": "Draft"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "maxLength": 200,
+                        "type": "string",
+                        "description": "A description of the policy.",
+                        "default": ""
+                    },
+                    "providersData": {
+                        "title": "Providersdata",
+                        "type": "object",
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/AWSProviderData"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/AzureProviderData"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/OnPremProviderData"
+                                }
+                            ],
+                            "discriminator": {
+                                "propertyName": "providerName",
+                                "mapping": {
+                                    "AWS": "#/components/schemas/AWSProviderData",
+                                    "Azure": "#/components/schemas/AzureProviderData",
+                                    "OnPrem": "#/components/schemas/OnPremProviderData"
+                                }
+                            }
+                        },
+                        "description": "Asset criteria for every platform supported in DPA. Target machines matching the criteria will be accessible via this policy. Expected Format: {\"AWS | Azure | OnPrem\" :  <AWSProviderData | AzureProviderData | OnPremProviderData>",
+                        "default": {}
+                    },
+                    "startDate": {
+                        "title": "Startdate",
+                        "type": "string",
+                        "description": "The date from which this policy will be used. Date format: yyyy-mm-ddd"
+                    },
+                    "endDate": {
+                        "title": "Enddate",
+                        "type": "string",
+                        "description": "The date until which this policy will be used. After this date passes, the policy will move to Expired status. Date format: yyyy-mm-dd"
+                    },
+                    "userAccessRules": {
+                        "title": "Useraccessrules",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AuthorizationRuleDto"
+                        },
+                        "description": "The access rule specifies the access profile, which members can assume it, and when users are allowed to access the assets.",
+                        "default": []
+                    }
+                },
+                "example": {
+                    "policyName": "Production App Access",
+                    "status": "Enabled",
+                    "description": "",
+                    "providersData": {
+                        "AWS": {
+                            "regions": [
+                                "us-east-1",
+                                "us-east-2"
+                            ],
+                            "tags": [
+                                {
+                                    "Key": "env",
+                                    "Value": [
+                                        "prod"
+                                    ]
+                                }
+                            ],
+                            "vpcIds": [],
+                            "accountIds": []
+                        },
+                        "Azure": {
+                            "regions": [
+                                "eastus2",
+                                "eastus"
+                            ],
+                            "tags": [
+                                {
+                                    "Key": "env",
+                                    "Value": [
+                                        "prod"
+                                    ]
+                                }
+                            ],
+                            "resourceGroups": [],
+                            "vnetIds": [],
+                            "subscriptions": []
+                        },
+                        "OnPrem": {
+                            "fqdnRulesConjunction": "OR",
+                            "fqdnRules": [
+                                {
+                                    "operator": "EXACTLY",
+                                    "computernamePattern": "acme.com",
+                                    "domain": "ad.product2.com"
+                                }
+                            ]
+                        }
+                    },
+                    "startDate": "2023-01-10",
+                    "endDate": "2024-01-10",
+                    "userAccessRules": [
+                        {
+                            "ruleName": "dev-team-access",
+                            "userData": {
+                                "roles": [
+                                    "DEV_TEAM_ROLE"
+                                ],
+                                "groups": [],
+                                "users": []
+                            },
+                            "connectionInformation": {
+                                "connectAs": {
+                                    "AWS": {
+                                        "ssh": "ec2-user",
+                                        "rdp": {
+                                            "localEphemeralUser": {
+                                                "assignGroups": [
+                                                    "Administrators"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "Azure": {
+                                        "ssh": "azureuser"
+                                    },
+                                    "OnPrem": {
+                                        "rdp": {
+                                            "localEphemeralUser": {
+                                                "assignGroups": [
+                                                    "Administrators"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "grantAccess": 3,
+                                "idleTime": 10,
+                                "daysOfWeek": [
+                                    "Mon",
+                                    "Tue"
+                                ],
+                                "fullDays": false,
+                                "hoursFrom": "10:00",
+                                "hoursTo": "18:00",
+                                "timeZone": "Asia/Jerusalem"
+                            }
+                        }
+                    ]
+                }
+            },
+            "AuthorizationPolicyListItemDto": {
+                "title": "AuthorizationPolicyListItemDto",
+                "required": [
+                    "policyId",
+                    "status",
+                    "policyName",
+                    "updatedOn",
+                    "ruleNames"
+                ],
+                "type": "object",
+                "properties": {
+                    "policyId": {
+                        "title": "Policyid",
+                        "type": "string"
+                    },
+                    "status": {
+                        "title": "Status",
+                        "type": "string"
+                    },
+                    "policyName": {
+                        "title": "Policyname",
+                        "type": "string"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "type": "string",
+                        "default": ""
+                    },
+                    "updatedOn": {
+                        "title": "Updatedon",
+                        "type": "string"
+                    },
+                    "ruleNames": {
+                        "title": "Rulenames",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "platforms": {
+                        "title": "Platforms",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "default": [
+                            "AWS"
+                        ]
+                    }
+                }
+            },
+            "AuthorizationRuleDto": {
+                "title": "AuthorizationRuleDto",
+                "required": [
+                    "ruleName",
+                    "userData"
+                ],
+                "type": "object",
+                "properties": {
+                    "ruleName": {
+                        "title": "Rulename",
+                        "maxLength": 30,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The access rule name."
+                    },
+                    "userData": {
+                        "title": "Userdata",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/UserData"
+                            }
+                        ],
+                        "description": "The members that can access the assets defined in the policy. At least one member type is required."
+                    },
+                    "connectionInformation": {
+                        "$ref": "#/components/schemas/TokenInformation"
+                    }
+                }
+            },
+            "AzureProviderData": {
+                "title": "AzureProviderData",
+                "required": [
+                    "regions",
+                    "tags",
+                    "resourceGroups",
+                    "vnetIds",
+                    "subscriptions"
+                ],
+                "type": "object",
+                "properties": {
+                    "providerName": {
+                        "title": "Providername",
+                        "enum": [
+                            "Azure"
+                        ],
+                        "type": "string",
+                        "default": "Azure"
+                    },
+                    "regions": {
+                        "title": "Regions",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Azure region names. For example: eastus2. Leave empty for all regions."
+                    },
+                    "tags": {
+                        "title": "Tags",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/KeyValTagType"
+                        },
+                        "description": "A list of key/value pairs that have been defined as custom tags for your  Azure VMs. Leave empty for all tags"
+                    },
+                    "resourceGroups": {
+                        "title": "Resourcegroups",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of Azure resource group IDs. Leave empty for all resource groups"
+                    },
+                    "vnetIds": {
+                        "title": "Vnetids",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of Azure VNet IDs. Leave empty for all VNets."
+                    },
+                    "subscriptions": {
+                        "title": "Subscriptions",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Azure subscription IDs. Leave empty for all subscriptions."
+                    }
+                }
+            },
+            "ConnectionProtocolType": {
+                "title": "ConnectionProtocolType",
+                "enum": [
+                    "ssh",
+                    "scp",
+                    "sftp",
+                    "rdp",
+                    "https"
+                ],
+                "type": "string",
+                "description": "Defines the possible protocol types allowed to be used"
+            },
+            "FQDNOperator": {
+                "title": "FQDNOperator",
+                "enum": [
+                    "EXACTLY",
+                    "WILDCARD",
+                    "PREFIX",
+                    "SUFFIX",
+                    "CONTAINS"
+                ],
+                "type": "string",
+                "description": "Defines possible operators for the rule"
+            },
+            "FQDNRule": {
+                "title": "FQDNRule",
+                "required": [
+                    "operator",
+                    "computernamePattern",
+                    "domain"
+                ],
+                "type": "object",
+                "properties": {
+                    "operator": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FQDNOperator"
+                            }
+                        ],
+                        "description": "Operator to perform on the FQDN"
+                    },
+                    "computernamePattern": {
+                        "title": "Computernamepattern",
+                        "type": "string",
+                        "description": "The pattern in relations to the operator"
+                    },
+                    "domain": {
+                        "title": "Domain",
+                        "type": "string",
+                        "description": "The domain in which to execute the operator on the pattern"
+                    }
+                },
+                "description": "Defines a specific FQDN rule used to match a given DNS record"
+            },
+            "FQDNRulesConjunction": {
+                "title": "FQDNRulesConjunction",
+                "enum": [
+                    "AND",
+                    "OR"
+                ],
+                "type": "string",
+                "description": "Defines the rule relationship between all of the FQDNRules"
+            },
+            "KeyValTagType": {
+                "title": "KeyValTagType",
+                "required": [
+                    "Key"
+                ],
+                "type": "object",
+                "properties": {
+                    "Key": {
+                        "title": "Key",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "Value": {
+                        "title": "Value",
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "LocalEphemeralUserConnectionMethodData": {
+                "title": "LocalEphemeralUserConnectionMethodData",
+                "type": "object",
+                "properties": {
+                    "assignGroups": {
+                        "title": "Assigngroups",
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Predefined assigned groups of the user",
+                        "default": []
+                    }
+                }
+            },
+            "OnPremProviderData": {
+                "title": "OnPremProviderData",
+                "required": [
+                    "fqdnRulesConjunction",
+                    "fqdnRules"
+                ],
+                "type": "object",
+                "properties": {
+                    "providerName": {
+                        "title": "Providername",
+                        "enum": [
+                            "OnPrem"
+                        ],
+                        "type": "string",
+                        "default": "OnPrem"
+                    },
+                    "fqdnRulesConjunction": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FQDNRulesConjunction"
+                            }
+                        ],
+                        "description": "Rules relationships"
+                    },
+                    "fqdnRules": {
+                        "title": "Fqdnrules",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FQDNRule"
+                        },
+                        "description": "List of FQDN rules applied to the connection"
+                    }
+                },
+                "description": "Defines the onprem provider data\nDefining fqdn rules for asserting a policy"
+            },
+            "RDPLocalEphemeralUserConnectionData": {
+                "title": "RDPLocalEphemeralUserConnectionData",
+                "required": [
+                    "localEphemeralUser"
+                ],
+                "type": "object",
+                "properties": {
+                    "localEphemeralUser": {
+                        "title": "Localephemeraluser",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LocalEphemeralUserConnectionMethodData"
+                            }
+                        ],
+                        "description": "Local ephemeral user method related data"
+                    }
+                }
+            },
+            "RuleStatus": {
+                "title": "RuleStatus",
+                "enum": [
+                    "Enabled",
+                    "Disabled",
+                    "Draft",
+                    "Expired"
+                ],
+                "type": "string",
+                "description": "An enumeration."
+            },
+            "TokenInformation": {
+                "title": "TokenInformation",
+                "required": [
+                    "connectAs",
+                    "daysOfWeek",
+                    "timeZone"
+                ],
+                "type": "object",
+                "properties": {
+                    "connectAs": {
+                        "title": "Connectas",
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/RDPLocalEphemeralUserConnectionData"
+                                    }
+                                ]
+                            }
+                        },
+                        "description": "The profile that the policy members assume in order to connect to the target for each platform. For SSH - the local target user or a personal user template. For RDP - the groups that the local user will be part of. Expected format: {\"SSH | RDP\": <RDPLocalEphemeralUserConnectionData | SSHCertificateConnectionData>}"
+                    },
+                    "grantAccess": {
+                        "title": "Grantaccess",
+                        "maximum": 24.0,
+                        "exclusiveMinimum": 0.0,
+                        "type": "integer",
+                        "description": "The maximum time of the session in hours.",
+                        "default": 2
+                    },
+                    "idleTime": {
+                        "title": "Idletime",
+                        "maximum": 120.0,
+                        "exclusiveMinimum": 0.0,
+                        "type": "integer",
+                        "description": "The maximum idle time before the session ends, in minutes.",
+                        "default": 10
+                    },
+                    "EffectiveSessionDuration": {
+                        "title": "Effectivesessionduration",
+                        "exclusiveMinimum": 0.0,
+                        "type": "integer"
+                    },
+                    "daysOfWeek": {
+                        "title": "Daysofweek",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Days of the week during which the policy will allow access. Leave empty for all days."
+                    },
+                    "fullDays": {
+                        "title": "Fulldays",
+                        "type": "boolean",
+                        "description": "Whether the policy will give access during the entire day. If this is set to false, a timeframe is required in the hoursFrom and hoursTo parameters.",
+                        "default": true
+                    },
+                    "hoursFrom": {
+                        "title": "Hoursfrom",
+                        "type": "string",
+                        "description": "The time of day from which the policy will allow access. Time format: hh:mm."
+                    },
+                    "hoursTo": {
+                        "title": "Hoursto",
+                        "type": "string",
+                        "description": "The time of day until which the policy will allow access. Time format: hh:mm."
+                    },
+                    "timeZone": {
+                        "title": "Timezone",
+                        "type": "string",
+                        "description": "The timezone that is taken into account when calculating the hoursFrom and hoursTo parameters. Represented by zone name such as \"America/Los_Angeles\" or \"Australia/Sydney\". These names are defined by TZ database name. Full list can be found in the following links: https://www.iana.org/time-zones, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+                    }
+                }
+            },
+            "UserConnectionData": {
+                "title": "UserConnectionData",
+                "required": [
+                    "connectionType"
+                ],
+                "type": "object",
+                "properties": {
+                    "connectionType": {
+                        "$ref": "#/components/schemas/ConnectionProtocolType"
+                    }
+                }
+            },
+            "UserData": {
+                "title": "UserData",
+                "type": "object",
+                "properties": {
+                    "roles": {
+                        "title": "Roles",
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/UserDataAttribute"
+                                }
+                            ]
+                        },
+                        "description": "The roles that define which users can access the assets defined in the policy.",
+                        "default": []
+                    },
+                    "groups": {
+                        "title": "Groups",
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/UserDataAttribute"
+                                }
+                            ]
+                        },
+                        "description": "The groups that define which users can access the assets defined in the policy.",
+                        "default": []
+                    },
+                    "users": {
+                        "title": "Users",
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/UserDataAttribute"
+                                }
+                            ]
+                        },
+                        "description": "The users that can access the assets defined in the policy. The user's login name as appears in CyberArk Identity (login_name@suffix).",
+                        "default": []
+                    },
+                    "connectionData": {
+                        "title": "Connectiondata",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/UserConnectionData"
+                            }
+                        ],
+                        "description": "Access rule connection details.",
+                        "default": {
+                            "connection_type": "ssh"
+                        }
+                    },
+                    "username": {
+                        "title": "Username",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                }
+            },
+            "UserDataAttribute": {
+                "title": "UserDataAttribute",
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "source": {
+                        "title": "Source",
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
